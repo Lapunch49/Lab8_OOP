@@ -1014,6 +1014,7 @@ namespace Lab8_OOP
             this.treeView_stor.Name = "treeView_stor";
             this.treeView_stor.Size = new System.Drawing.Size(149, 230);
             this.treeView_stor.TabIndex = 18;
+            this.treeView_stor.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_stor_AfterSelect);
             // 
             // Form1
             // 
@@ -1125,7 +1126,6 @@ namespace Lab8_OOP
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel_bottom_right;
         private System.Windows.Forms.Label label_treeView;
-        private System.Windows.Forms.Panel ve;
         //public System.Windows.Forms.PictureBox pictureBox1;
     }
 }

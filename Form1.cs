@@ -285,6 +285,14 @@ namespace Lab8_OOP
             // раскрываем главный узел дерева и только его
             treeView_stor.Nodes[0].Expand();
         }
+        private void treeView_stor_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            // находим индекс элемента в хранилище
+            int ind = treeView_stor.SelectedNode.Index;
+            // выделяем его
+            storObj.change_highlight_of_object(ind);
+            pictureBox1.Invalidate();
+        }
     }
     public class Brush
     {
