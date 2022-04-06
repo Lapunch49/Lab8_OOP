@@ -80,7 +80,7 @@ namespace Lab8_OOP
             this.CSquare = new System.Windows.Forms.Button();
             this.CTriangle = new System.Windows.Forms.Button();
             this.CCircle = new System.Windows.Forms.Button();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel_save = new System.Windows.Forms.Panel();
             this.btn_save = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.btn_load = new System.Windows.Forms.Button();
@@ -91,6 +91,7 @@ namespace Lab8_OOP
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel_right = new System.Windows.Forms.Panel();
             this.panel_bottom_right = new System.Windows.Forms.Panel();
+            this.label_treeView = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btn_DisGroup = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -112,7 +113,7 @@ namespace Lab8_OOP
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel7.SuspendLayout();
+            this.panel_save.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panel_right.SuspendLayout();
             this.panel_bottom_right.SuspendLayout();
@@ -774,20 +775,19 @@ namespace Lab8_OOP
             this.CCircle.UseVisualStyleBackColor = false;
             this.CCircle.Click += new System.EventHandler(this.btn_shape_Click);
             // 
-            // panel7
+            // panel_save
             // 
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.btn_save);
-            this.panel7.Controls.Add(this.label11);
-            this.panel7.Controls.Add(this.btn_load);
-            this.panel7.Controls.Add(this.btn_clear);
-            this.panel7.Controls.Add(this.label9);
-            this.panel7.Controls.Add(this.label10);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(56, 191);
-            this.panel7.TabIndex = 17;
+            this.panel_save.Controls.Add(this.btn_save);
+            this.panel_save.Controls.Add(this.label11);
+            this.panel_save.Controls.Add(this.btn_load);
+            this.panel_save.Controls.Add(this.btn_clear);
+            this.panel_save.Controls.Add(this.label9);
+            this.panel_save.Controls.Add(this.label10);
+            this.panel_save.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel_save.Location = new System.Drawing.Point(0, 0);
+            this.panel_save.Name = "panel_save";
+            this.panel_save.Size = new System.Drawing.Size(56, 191);
+            this.panel_save.TabIndex = 17;
             // 
             // btn_save
             // 
@@ -807,9 +807,9 @@ namespace Lab8_OOP
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(-2, 61);
+            this.label11.Location = new System.Drawing.Point(4, 61);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 23);
+            this.label11.Size = new System.Drawing.Size(47, 23);
             this.label11.TabIndex = 21;
             this.label11.Text = "Load";
             // 
@@ -842,18 +842,18 @@ namespace Lab8_OOP
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(0, 122);
+            this.label9.Location = new System.Drawing.Point(7, 122);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(67, 24);
+            this.label9.Size = new System.Drawing.Size(45, 24);
             this.label9.TabIndex = 17;
             this.label9.Text = "Clear";
             // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(0, 3);
+            this.label10.Location = new System.Drawing.Point(4, 3);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 23);
+            this.label10.Size = new System.Drawing.Size(45, 23);
             this.label10.TabIndex = 19;
             this.label10.Text = "Save";
             // 
@@ -880,7 +880,8 @@ namespace Lab8_OOP
             // 
             // panel_bottom_right
             // 
-            this.panel_bottom_right.Controls.Add(this.panel7);
+            this.panel_bottom_right.Controls.Add(this.label_treeView);
+            this.panel_bottom_right.Controls.Add(this.panel_save);
             this.panel_bottom_right.Controls.Add(this.panel10);
             this.panel_bottom_right.Controls.Add(this.panel11);
             this.panel_bottom_right.Dock = System.Windows.Forms.DockStyle.Top;
@@ -889,13 +890,22 @@ namespace Lab8_OOP
             this.panel_bottom_right.Size = new System.Drawing.Size(158, 191);
             this.panel_bottom_right.TabIndex = 21;
             // 
+            // label_treeView
+            // 
+            this.label_treeView.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label_treeView.Location = new System.Drawing.Point(62, -3);
+            this.label_treeView.Name = "label_treeView";
+            this.label_treeView.Size = new System.Drawing.Size(91, 23);
+            this.label_treeView.TabIndex = 20;
+            this.label_treeView.Text = "TreeView";
+            // 
             // panel10
             // 
             this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel10.Controls.Add(this.btn_DisGroup);
             this.panel10.Controls.Add(this.label8);
             this.panel10.Controls.Add(this.btn_Group);
-            this.panel10.Location = new System.Drawing.Point(55, 0);
+            this.panel10.Location = new System.Drawing.Point(61, 34);
             this.panel10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(98, 80);
@@ -946,7 +956,7 @@ namespace Lab8_OOP
             this.panel11.Controls.Add(this.button1);
             this.panel11.Controls.Add(this.lb_sticky);
             this.panel11.Controls.Add(this.button2);
-            this.panel11.Location = new System.Drawing.Point(55, 113);
+            this.panel11.Location = new System.Drawing.Point(61, 113);
             this.panel11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(98, 78);
@@ -969,9 +979,9 @@ namespace Lab8_OOP
             // lb_sticky
             // 
             this.lb_sticky.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lb_sticky.Location = new System.Drawing.Point(18, 2);
+            this.lb_sticky.Location = new System.Drawing.Point(18, 4);
             this.lb_sticky.Name = "lb_sticky";
-            this.lb_sticky.Size = new System.Drawing.Size(67, 23);
+            this.lb_sticky.Size = new System.Drawing.Size(54, 23);
             this.lb_sticky.TabIndex = 11;
             this.lb_sticky.Text = "Sticky";
             // 
@@ -1000,7 +1010,6 @@ namespace Lab8_OOP
             // 
             // treeView_stor
             // 
-            this.treeView_stor.CheckBoxes = true;
             this.treeView_stor.Location = new System.Drawing.Point(4, 6);
             this.treeView_stor.Name = "treeView_stor";
             this.treeView_stor.Size = new System.Drawing.Size(149, 230);
@@ -1031,7 +1040,7 @@ namespace Lab8_OOP
             this.panel5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
+            this.panel_save.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel_right.ResumeLayout(false);
             this.panel_bottom_right.ResumeLayout(false);
@@ -1078,7 +1087,7 @@ namespace Lab8_OOP
         private System.Windows.Forms.Button CRhomb;
         private System.Windows.Forms.Button CRectangle;
         private System.Windows.Forms.Button btn_clear;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel_save;
         private System.Windows.Forms.Button btn_other;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button btn_gre;
@@ -1115,6 +1124,8 @@ namespace Lab8_OOP
         private System.Windows.Forms.Label lb_sticky;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel_bottom_right;
+        private System.Windows.Forms.Label label_treeView;
+        private System.Windows.Forms.Panel ve;
         //public System.Windows.Forms.PictureBox pictureBox1;
     }
 }

@@ -148,6 +148,7 @@ namespace Lab8_OOP
             add(new_group);
             // объекты внутри группы и группа(рамка) выделяются
             st[i].change_highlight();
+            notify_observers();
         }
         public void del_highlighted_groups()
         {
@@ -162,6 +163,7 @@ namespace Lab8_OOP
                     del(i);
                     i++;
                 }
+            notify_observers();
         }
         public void notify_observers()
         {

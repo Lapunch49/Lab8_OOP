@@ -259,26 +259,31 @@ namespace Lab8_OOP
             // Создаем у узла дерева tn новый дочерний узел t;
             TreeNode t = new TreeNode(obj.classname());
             tn.Nodes.Add(t);
+            // если объект выделенный, выделяяем его и в treeView
+            if (obj.get_highlighted() == true)
+                t.BackColor = Color.LightCoral;
 
             // если объект obj является группой, то:
-            if (tn.Text == "CGroup")
+            if (t.Text == "CGroup")
             {   // для всех объектов oo из группы obj создаем узлы
                 CGroup group = obj as CGroup;
                 if (group != null) {
                     for (int i = 0; i < group.get_count(); ++i)
                     {
                         processNode(t, group.get_el(i));
-                    } 
+                    }
+                    //t.Expand();
                 }
             }
         }
-
         public void UpdateTreeView(object sender, EventArgs e) // обновляет TreeView в соответсвии с состоянием хранилища
         {
             treeView_stor.Nodes.Clear();
             treeView_stor.Nodes.Add("Storage");
             for (int i = 0; i < storObj.get_count(); ++i)
                 processNode(treeView_stor.Nodes[0], storObj.get_el(i));
+            // раскрываем главный узел дерева и только его
+            treeView_stor.Nodes[0].Expand();
         }
     }
     public class Brush
