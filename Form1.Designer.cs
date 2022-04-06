@@ -81,6 +81,7 @@ namespace Lab8_OOP
             this.CTriangle = new System.Windows.Forms.Button();
             this.CCircle = new System.Windows.Forms.Button();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.btn_save = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.btn_load = new System.Windows.Forms.Button();
             this.btn_clear = new System.Windows.Forms.Button();
@@ -88,12 +89,18 @@ namespace Lab8_OOP
             this.label10 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel_right = new System.Windows.Forms.Panel();
+            this.panel_bottom_right = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.btn_DisGroup = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.btn_Group = new System.Windows.Forms.Button();
-            this.btn_save = new System.Windows.Forms.Button();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lb_sticky = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.panel_top_right = new System.Windows.Forms.Panel();
+            this.treeView_stor = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -107,20 +114,23 @@ namespace Lab8_OOP
             this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
+            this.panel_right.SuspendLayout();
+            this.panel_bottom_right.SuspendLayout();
             this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel_top_right.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(542, 434);
+            this.pictureBox1.Size = new System.Drawing.Size(581, 434);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -773,11 +783,26 @@ namespace Lab8_OOP
             this.panel7.Controls.Add(this.btn_clear);
             this.panel7.Controls.Add(this.label9);
             this.panel7.Controls.Add(this.label10);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 118);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(55, 198);
+            this.panel7.Size = new System.Drawing.Size(56, 191);
             this.panel7.TabIndex = 17;
+            // 
+            // btn_save
+            // 
+            this.btn_save.BackColor = System.Drawing.Color.Gainsboro;
+            this.btn_save.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_save.BackgroundImage")));
+            this.btn_save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_save.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_save.Location = new System.Drawing.Point(7, 24);
+            this.btn_save.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(38, 35);
+            this.btn_save.TabIndex = 22;
+            this.btn_save.UseVisualStyleBackColor = false;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // label11
             // 
@@ -834,24 +859,35 @@ namespace Lab8_OOP
             // 
             // panel8
             // 
-            this.panel8.Controls.Add(this.panel9);
+            this.panel8.Controls.Add(this.panel_right);
             this.panel8.Controls.Add(this.pictureBox1);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(147, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(599, 434);
+            this.panel8.Size = new System.Drawing.Size(638, 434);
             this.panel8.TabIndex = 2;
             // 
-            // panel9
+            // panel_right
             // 
-            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel9.Controls.Add(this.panel7);
-            this.panel9.Controls.Add(this.panel10);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel9.Location = new System.Drawing.Point(542, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(57, 434);
-            this.panel9.TabIndex = 1;
+            this.panel_right.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel_right.Controls.Add(this.panel_bottom_right);
+            this.panel_right.Controls.Add(this.panel_top_right);
+            this.panel_right.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel_right.Location = new System.Drawing.Point(478, 0);
+            this.panel_right.Name = "panel_right";
+            this.panel_right.Size = new System.Drawing.Size(160, 434);
+            this.panel_right.TabIndex = 1;
+            // 
+            // panel_bottom_right
+            // 
+            this.panel_bottom_right.Controls.Add(this.panel7);
+            this.panel_bottom_right.Controls.Add(this.panel10);
+            this.panel_bottom_right.Controls.Add(this.panel11);
+            this.panel_bottom_right.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_bottom_right.Location = new System.Drawing.Point(0, 242);
+            this.panel_bottom_right.Name = "panel_bottom_right";
+            this.panel_bottom_right.Size = new System.Drawing.Size(158, 191);
+            this.panel_bottom_right.TabIndex = 21;
             // 
             // panel10
             // 
@@ -859,11 +895,10 @@ namespace Lab8_OOP
             this.panel10.Controls.Add(this.btn_DisGroup);
             this.panel10.Controls.Add(this.label8);
             this.panel10.Controls.Add(this.btn_Group);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(0, 0);
+            this.panel10.Location = new System.Drawing.Point(55, 0);
             this.panel10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(55, 118);
+            this.panel10.Size = new System.Drawing.Size(98, 80);
             this.panel10.TabIndex = 12;
             // 
             // btn_DisGroup
@@ -873,7 +908,7 @@ namespace Lab8_OOP
             this.btn_DisGroup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_DisGroup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_DisGroup.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_DisGroup.Location = new System.Drawing.Point(7, 69);
+            this.btn_DisGroup.Location = new System.Drawing.Point(51, 30);
             this.btn_DisGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_DisGroup.Name = "btn_DisGroup";
             this.btn_DisGroup.Size = new System.Drawing.Size(38, 35);
@@ -884,7 +919,7 @@ namespace Lab8_OOP
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(-2, 5);
+            this.label8.Location = new System.Drawing.Point(18, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 23);
             this.label8.TabIndex = 11;
@@ -905,33 +940,84 @@ namespace Lab8_OOP
             this.btn_Group.UseVisualStyleBackColor = false;
             this.btn_Group.Click += new System.EventHandler(this.btn_Group_Click);
             // 
-            // btn_save
+            // panel11
             // 
-            this.btn_save.BackColor = System.Drawing.Color.Gainsboro;
-            this.btn_save.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_save.BackgroundImage")));
-            this.btn_save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_save.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_save.Location = new System.Drawing.Point(7, 24);
-            this.btn_save.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(38, 35);
-            this.btn_save.TabIndex = 22;
-            this.btn_save.UseVisualStyleBackColor = false;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel11.Controls.Add(this.button1);
+            this.panel11.Controls.Add(this.lb_sticky);
+            this.panel11.Controls.Add(this.button2);
+            this.panel11.Location = new System.Drawing.Point(55, 113);
+            this.panel11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(98, 78);
+            this.panel11.TabIndex = 19;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(51, 29);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(38, 35);
+            this.button1.TabIndex = 5;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // lb_sticky
+            // 
+            this.lb_sticky.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_sticky.Location = new System.Drawing.Point(18, 2);
+            this.lb_sticky.Name = "lb_sticky";
+            this.lb_sticky.Size = new System.Drawing.Size(67, 23);
+            this.lb_sticky.TabIndex = 11;
+            this.lb_sticky.Text = "Sticky";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.Gainsboro;
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button2.Location = new System.Drawing.Point(7, 29);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(38, 35);
+            this.button2.TabIndex = 2;
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // panel_top_right
+            // 
+            this.panel_top_right.Controls.Add(this.treeView_stor);
+            this.panel_top_right.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_top_right.Location = new System.Drawing.Point(0, 0);
+            this.panel_top_right.Name = "panel_top_right";
+            this.panel_top_right.Size = new System.Drawing.Size(158, 242);
+            this.panel_top_right.TabIndex = 20;
+            // 
+            // treeView_stor
+            // 
+            this.treeView_stor.CheckBoxes = true;
+            this.treeView_stor.Location = new System.Drawing.Point(4, 6);
+            this.treeView_stor.Name = "treeView_stor";
+            this.treeView_stor.Size = new System.Drawing.Size(149, 230);
+            this.treeView_stor.TabIndex = 18;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(746, 434);
+            this.ClientSize = new System.Drawing.Size(785, 434);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
-            this.Text = "Laboratory work №7";
+            this.Text = "Laboratory work №8";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -947,8 +1033,11 @@ namespace Lab8_OOP
             this.panel3.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
-            this.panel9.ResumeLayout(false);
+            this.panel_right.ResumeLayout(false);
+            this.panel_bottom_right.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel_top_right.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1009,7 +1098,7 @@ namespace Lab8_OOP
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button CEllipse;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel_right;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btn_DisGroup;
         private System.Windows.Forms.Button btn_Group;
@@ -1019,6 +1108,13 @@ namespace Lab8_OOP
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.Panel panel_top_right;
+        private System.Windows.Forms.TreeView treeView_stor;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label lb_sticky;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel panel_bottom_right;
         //public System.Windows.Forms.PictureBox pictureBox1;
     }
 }

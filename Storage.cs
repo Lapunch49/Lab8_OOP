@@ -11,6 +11,7 @@ namespace Lab8_OOP
     {
         protected int n, k; // размер и кол-во эл-в
         public CObject[] st;
+        public System.EventHandler observers;
         public Storage()
         {
             n = 1;
@@ -45,6 +46,7 @@ namespace Lab8_OOP
                     st_[i] = null;
                 st = st_;
             }
+            notify_observers();
         }
         public void del(int ind)
         {
@@ -52,6 +54,7 @@ namespace Lab8_OOP
                 st[i] = st[i + 1];
             k = k - 1;
             st[k] = null;
+            notify_observers();
         }
         public CObject get_el(int ind)
         {
@@ -83,6 +86,7 @@ namespace Lab8_OOP
         {
             for (int i = 0; i < k; ++i)
                 st[i].draw(e);
+            notify_observers();
         }
         public void resize_highlighted_objects(bool size_delt, int pbW, int pbH, int d)
         {
@@ -107,6 +111,7 @@ namespace Lab8_OOP
             for (int i = 0; i < k; ++i)
                 if (st[i].get_highlighted() == true)
                     st[i].change_highlight();
+            notify_observers();
         }
         public int mouseClick_on_Object(int x, int y) // возвращает индекс объекта, на который попала мышь или - число -1
         {
@@ -115,6 +120,12 @@ namespace Lab8_OOP
                 if (st[i].mouseClick_on_Object(x, y) == true)
                     index = i;
             return index;
+        }
+        public void change_highlight_of_object(int ind)
+        {
+            if (ind != -1)
+                st[ind].change_highlight();
+            notify_observers();
         }
 
         // методы для работы с группами 
@@ -151,6 +162,10 @@ namespace Lab8_OOP
                     del(i);
                     i++;
                 }
+        }
+        public void notify_observers()
+        {
+            observers.Invoke(this, null);
         }
     };
 }

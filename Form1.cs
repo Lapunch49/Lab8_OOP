@@ -36,6 +36,7 @@ namespace Lab8_OOP
         {
             InitializeComponent();
             this.KeyPreview = true;
+            storObj.observers += new EventHandler(this.UpdateTreeView);
             // меняю оформление концов pen для рисовании отрезков
             Brush.normPen.EndCap = LineCap.RoundAnchor;
             Brush.normPen.StartCap = LineCap.RoundAnchor;
@@ -161,9 +162,10 @@ namespace Lab8_OOP
                         storObj.setAllHighlightFalse();
                     }
                 }
+
                 // выделяем объект, по которому попали
-                if (ind != -1)
-                    storObj.get_el(ind).change_highlight();
+                storObj.change_highlight_of_object(ind);
+
                 pictureBox1.Invalidate();
             }
         }
@@ -240,17 +242,43 @@ namespace Lab8_OOP
             storObj.del_highlighted_groups();
             pictureBox1.Invalidate();
         }
-
         private void btn_save_Click(object sender, EventArgs e)
         {
             storObj.saveObjects();
         }
-
         private void btn_load_Click(object sender, EventArgs e)
         {
             btn_clear_Click(sender, e);
             storObj.loadObjects();
             pictureBox1.Invalidate();
+        }
+
+        // для TreeView
+        private void processNode(TreeNode tn, CObject obj)
+        {
+            // Создаем у узла дерева tn новый дочерний узел t;
+            TreeNode t = new TreeNode(obj.classname());
+            tn.Nodes.Add(t);
+
+            // если объект obj является группой, то:
+            if (tn.Text == "CGroup")
+            {   // для всех объектов oo из группы obj создаем узлы
+                CGroup group = obj as CGroup;
+                if (group != null) {
+                    for (int i = 0; i < group.get_count(); ++i)
+                    {
+                        processNode(t, group.get_el(i));
+                    } 
+                }
+            }
+        }
+
+        public void UpdateTreeView(object sender, EventArgs e) // обновляет TreeView в соответсвии с состоянием хранилища
+        {
+            treeView_stor.Nodes.Clear();
+            treeView_stor.Nodes.Add("Storage");
+            for (int i = 0; i < storObj.get_count(); ++i)
+                processNode(treeView_stor.Nodes[0], storObj.get_el(i));
         }
     }
     public class Brush
