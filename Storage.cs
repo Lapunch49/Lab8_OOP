@@ -100,6 +100,8 @@ namespace Lab8_OOP
                 if (st[i].get_highlighted() == true)
                     st[i].move(move, pbW, pbH, d);
         }
+        
+
         public void setColor_highlighted_objects(Color new_color)
         {
             for (int i = 0; i < k; ++i)
@@ -145,9 +147,12 @@ namespace Lab8_OOP
                 }
                 else i++;
             }
-            add(new_group);
-            // объекты внутри группы и группа(рамка) выделяются
-            st[i].change_highlight();
+            if (new_group.get_count() != 0)
+            {
+                add(new_group);
+                // объекты внутри группы и группа(рамка) выделяются
+                st[i].change_highlight();
+            }
             notify_observers();
         }
         public void del_highlighted_groups()
@@ -168,6 +173,52 @@ namespace Lab8_OOP
         public void notify_observers()
         {
             observers.Invoke(this, null);
+        }
+
+        // методы свойства sticky
+        public void set_sticky_of_objects(bool state) // задаем свойсво липкости выделенным объектам по флагу state 
+        {
+            for (int i = 0; i < k; ++i)
+                if (st[i].get_highlighted() == true)
+                {
+                    if (state == true)
+
+                        st[i].set_stickiness();
+                    else st[i].set_nonStickiness();
+                }
+        }
+        public void check_new_objects_sticked(PaintEventArgs e) // обновляем наблюдателей каждого липкого объекта
+        {
+            Region rgn;
+            for (int i = 0; i < k; ++i)
+            {
+                if (st[i].get_sticky() == true)
+                {
+                    // определяем область липкого объекта
+                    rgn = st[i].get_region();
+                    // для каждого объекта из хранилища, проверяем пересечение его области с областью липкого объекта
+                    for (int j = 0; j < k; ++j)
+                    {
+                        if (i != j)
+                        {   // в rgn записываем Region пересечения объектов
+                            rgn.Intersect(st[j].get_region());
+
+                            // если пересечение не пусто, то добавляем нового наблюдателя,
+                            // иначе - удаляем
+                            if (!rgn.IsEmpty(e.Graphics))
+                            {
+                                st[i].add_stickyObserver(st[j]);
+                                e.Graphics.FillRegion(Brush.stickyBrush, rgn);
+                            }
+                            else st[i].del_stickyObserver(st[j]);
+
+                            // возвращаем rgn область липкого объекта вместо области пересечения
+                            rgn = st[i].get_region();
+                        }
+                    }
+                }
+
+            }
         }
     };
 }

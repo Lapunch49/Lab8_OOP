@@ -91,16 +91,16 @@ namespace Lab8_OOP
             this.panel8 = new System.Windows.Forms.Panel();
             this.panel_right = new System.Windows.Forms.Panel();
             this.panel_bottom_right = new System.Windows.Forms.Panel();
-            this.label_treeView = new System.Windows.Forms.Label();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.btn_DisGroup = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.btn_DisGroup = new System.Windows.Forms.Button();
             this.btn_Group = new System.Windows.Forms.Button();
             this.panel11 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.lb_sticky = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btn_nonSticky = new System.Windows.Forms.Button();
+            this.btn_sticky = new System.Windows.Forms.Button();
             this.panel_top_right = new System.Windows.Forms.Panel();
+            this.label_treeView = new System.Windows.Forms.Label();
             this.treeView_stor = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -131,7 +131,7 @@ namespace Lab8_OOP
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(581, 434);
+            this.pictureBox1.Size = new System.Drawing.Size(478, 434);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -786,7 +786,7 @@ namespace Lab8_OOP
             this.panel_save.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel_save.Location = new System.Drawing.Point(0, 0);
             this.panel_save.Name = "panel_save";
-            this.panel_save.Size = new System.Drawing.Size(56, 191);
+            this.panel_save.Size = new System.Drawing.Size(67, 191);
             this.panel_save.TabIndex = 17;
             // 
             // btn_save
@@ -796,10 +796,10 @@ namespace Lab8_OOP
             this.btn_save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_save.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_save.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_save.Location = new System.Drawing.Point(7, 24);
+            this.btn_save.Location = new System.Drawing.Point(16, 24);
             this.btn_save.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(38, 35);
+            this.btn_save.Size = new System.Drawing.Size(42, 35);
             this.btn_save.TabIndex = 22;
             this.btn_save.UseVisualStyleBackColor = false;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
@@ -807,7 +807,7 @@ namespace Lab8_OOP
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(4, 61);
+            this.label11.Location = new System.Drawing.Point(16, 63);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(47, 23);
             this.label11.TabIndex = 21;
@@ -819,9 +819,9 @@ namespace Lab8_OOP
             this.btn_load.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_load.BackgroundImage")));
             this.btn_load.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_load.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_load.Location = new System.Drawing.Point(7, 84);
+            this.btn_load.Location = new System.Drawing.Point(16, 86);
             this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(38, 35);
+            this.btn_load.Size = new System.Drawing.Size(42, 35);
             this.btn_load.TabIndex = 20;
             this.btn_load.UseVisualStyleBackColor = false;
             this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
@@ -832,9 +832,9 @@ namespace Lab8_OOP
             this.btn_clear.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_clear.BackgroundImage")));
             this.btn_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_clear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_clear.Location = new System.Drawing.Point(7, 149);
+            this.btn_clear.Location = new System.Drawing.Point(17, 149);
             this.btn_clear.Name = "btn_clear";
-            this.btn_clear.Size = new System.Drawing.Size(38, 35);
+            this.btn_clear.Size = new System.Drawing.Size(42, 35);
             this.btn_clear.TabIndex = 16;
             this.btn_clear.UseVisualStyleBackColor = false;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
@@ -842,7 +842,7 @@ namespace Lab8_OOP
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(7, 122);
+            this.label9.Location = new System.Drawing.Point(17, 124);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 24);
             this.label9.TabIndex = 17;
@@ -851,7 +851,7 @@ namespace Lab8_OOP
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(4, 3);
+            this.label10.Location = new System.Drawing.Point(16, 3);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(45, 23);
             this.label10.TabIndex = 19;
@@ -880,7 +880,6 @@ namespace Lab8_OOP
             // 
             // panel_bottom_right
             // 
-            this.panel_bottom_right.Controls.Add(this.label_treeView);
             this.panel_bottom_right.Controls.Add(this.panel_save);
             this.panel_bottom_right.Controls.Add(this.panel10);
             this.panel_bottom_right.Controls.Add(this.panel11);
@@ -890,117 +889,113 @@ namespace Lab8_OOP
             this.panel_bottom_right.Size = new System.Drawing.Size(158, 191);
             this.panel_bottom_right.TabIndex = 21;
             // 
-            // label_treeView
-            // 
-            this.label_treeView.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label_treeView.Location = new System.Drawing.Point(62, -3);
-            this.label_treeView.Name = "label_treeView";
-            this.label_treeView.Size = new System.Drawing.Size(91, 23);
-            this.label_treeView.TabIndex = 20;
-            this.label_treeView.Text = "TreeView";
-            // 
             // panel10
             // 
-            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel10.Controls.Add(this.btn_DisGroup);
             this.panel10.Controls.Add(this.label8);
+            this.panel10.Controls.Add(this.btn_DisGroup);
             this.panel10.Controls.Add(this.btn_Group);
-            this.panel10.Location = new System.Drawing.Point(61, 34);
+            this.panel10.Location = new System.Drawing.Point(69, 5);
             this.panel10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(98, 80);
+            this.panel10.Size = new System.Drawing.Size(85, 95);
             this.panel10.TabIndex = 12;
-            // 
-            // btn_DisGroup
-            // 
-            this.btn_DisGroup.BackColor = System.Drawing.Color.Gainsboro;
-            this.btn_DisGroup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_DisGroup.BackgroundImage")));
-            this.btn_DisGroup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_DisGroup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_DisGroup.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_DisGroup.Location = new System.Drawing.Point(51, 30);
-            this.btn_DisGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btn_DisGroup.Name = "btn_DisGroup";
-            this.btn_DisGroup.Size = new System.Drawing.Size(38, 35);
-            this.btn_DisGroup.TabIndex = 5;
-            this.btn_DisGroup.UseVisualStyleBackColor = false;
-            this.btn_DisGroup.Click += new System.EventHandler(this.btn_DisGroup_Click);
             // 
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(18, 3);
+            this.label8.Location = new System.Drawing.Point(20, -2);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 23);
-            this.label8.TabIndex = 11;
+            this.label8.Size = new System.Drawing.Size(55, 19);
+            this.label8.TabIndex = 20;
             this.label8.Text = "Group";
+            // 
+            // btn_DisGroup
+            // 
+            this.btn_DisGroup.BackColor = System.Drawing.Color.Gainsboro;
+            this.btn_DisGroup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_DisGroup.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_DisGroup.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_DisGroup.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_DisGroup.Location = new System.Drawing.Point(7, 53);
+            this.btn_DisGroup.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_DisGroup.Name = "btn_DisGroup";
+            this.btn_DisGroup.Size = new System.Drawing.Size(71, 30);
+            this.btn_DisGroup.TabIndex = 5;
+            this.btn_DisGroup.Text = "Disgroup";
+            this.btn_DisGroup.UseVisualStyleBackColor = false;
+            this.btn_DisGroup.Click += new System.EventHandler(this.btn_DisGroup_Click);
             // 
             // btn_Group
             // 
             this.btn_Group.BackColor = System.Drawing.Color.Gainsboro;
-            this.btn_Group.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_Group.BackgroundImage")));
             this.btn_Group.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_Group.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_Group.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_Group.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Group.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_Group.Location = new System.Drawing.Point(7, 29);
+            this.btn_Group.Location = new System.Drawing.Point(7, 19);
             this.btn_Group.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Group.Name = "btn_Group";
-            this.btn_Group.Size = new System.Drawing.Size(38, 35);
+            this.btn_Group.Size = new System.Drawing.Size(71, 30);
             this.btn_Group.TabIndex = 2;
+            this.btn_Group.Text = "Group";
             this.btn_Group.UseVisualStyleBackColor = false;
             this.btn_Group.Click += new System.EventHandler(this.btn_Group_Click);
             // 
             // panel11
             // 
-            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel11.Controls.Add(this.button1);
-            this.panel11.Controls.Add(this.lb_sticky);
-            this.panel11.Controls.Add(this.button2);
-            this.panel11.Location = new System.Drawing.Point(61, 113);
+            this.panel11.Controls.Add(this.label12);
+            this.panel11.Controls.Add(this.btn_nonSticky);
+            this.panel11.Controls.Add(this.btn_sticky);
+            this.panel11.Location = new System.Drawing.Point(68, 90);
             this.panel11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(98, 78);
+            this.panel11.Size = new System.Drawing.Size(86, 101);
             this.panel11.TabIndex = 19;
             // 
-            // button1
+            // label12
             // 
-            this.button1.BackColor = System.Drawing.Color.Gainsboro;
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(51, 29);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(38, 35);
-            this.button1.TabIndex = 5;
-            this.button1.UseVisualStyleBackColor = false;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(24, 7);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 19);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Sticky";
             // 
-            // lb_sticky
+            // btn_nonSticky
             // 
-            this.lb_sticky.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lb_sticky.Location = new System.Drawing.Point(18, 4);
-            this.lb_sticky.Name = "lb_sticky";
-            this.lb_sticky.Size = new System.Drawing.Size(54, 23);
-            this.lb_sticky.TabIndex = 11;
-            this.lb_sticky.Text = "Sticky";
+            this.btn_nonSticky.BackColor = System.Drawing.Color.Gainsboro;
+            this.btn_nonSticky.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_nonSticky.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_nonSticky.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_nonSticky.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_nonSticky.Location = new System.Drawing.Point(8, 65);
+            this.btn_nonSticky.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_nonSticky.Name = "btn_nonSticky";
+            this.btn_nonSticky.Size = new System.Drawing.Size(71, 30);
+            this.btn_nonSticky.TabIndex = 5;
+            this.btn_nonSticky.Text = "Nonticky";
+            this.btn_nonSticky.UseVisualStyleBackColor = false;
+            this.btn_nonSticky.Click += new System.EventHandler(this.btn_nonSticky_Click);
             // 
-            // button2
+            // btn_sticky
             // 
-            this.button2.BackColor = System.Drawing.Color.Gainsboro;
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button2.Location = new System.Drawing.Point(7, 29);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(38, 35);
-            this.button2.TabIndex = 2;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btn_sticky.BackColor = System.Drawing.Color.Gainsboro;
+            this.btn_sticky.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_sticky.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btn_sticky.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_sticky.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btn_sticky.Location = new System.Drawing.Point(8, 31);
+            this.btn_sticky.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_sticky.Name = "btn_sticky";
+            this.btn_sticky.Size = new System.Drawing.Size(71, 30);
+            this.btn_sticky.TabIndex = 2;
+            this.btn_sticky.Text = "Sticky";
+            this.btn_sticky.UseVisualStyleBackColor = false;
+            this.btn_sticky.Click += new System.EventHandler(this.btn_sticky_Click);
             // 
             // panel_top_right
             // 
+            this.panel_top_right.Controls.Add(this.label_treeView);
             this.panel_top_right.Controls.Add(this.treeView_stor);
             this.panel_top_right.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_top_right.Location = new System.Drawing.Point(0, 0);
@@ -1008,11 +1003,20 @@ namespace Lab8_OOP
             this.panel_top_right.Size = new System.Drawing.Size(158, 242);
             this.panel_top_right.TabIndex = 20;
             // 
+            // label_treeView
+            // 
+            this.label_treeView.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label_treeView.Location = new System.Drawing.Point(4, 4);
+            this.label_treeView.Name = "label_treeView";
+            this.label_treeView.Size = new System.Drawing.Size(91, 23);
+            this.label_treeView.TabIndex = 20;
+            this.label_treeView.Text = "TreeView";
+            // 
             // treeView_stor
             // 
-            this.treeView_stor.Location = new System.Drawing.Point(4, 6);
+            this.treeView_stor.Location = new System.Drawing.Point(4, 30);
             this.treeView_stor.Name = "treeView_stor";
-            this.treeView_stor.Size = new System.Drawing.Size(149, 230);
+            this.treeView_stor.Size = new System.Drawing.Size(149, 206);
             this.treeView_stor.TabIndex = 18;
             this.treeView_stor.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_stor_AfterSelect);
             // 
@@ -1109,7 +1113,6 @@ namespace Lab8_OOP
         private System.Windows.Forms.Button CEllipse;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Panel panel_right;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btn_DisGroup;
         private System.Windows.Forms.Button btn_Group;
         private System.Windows.Forms.Label label11;
@@ -1121,11 +1124,12 @@ namespace Lab8_OOP
         private System.Windows.Forms.Panel panel_top_right;
         private System.Windows.Forms.TreeView treeView_stor;
         private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label lb_sticky;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_nonSticky;
+        private System.Windows.Forms.Button btn_sticky;
         private System.Windows.Forms.Panel panel_bottom_right;
         private System.Windows.Forms.Label label_treeView;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label12;
         //public System.Windows.Forms.PictureBox pictureBox1;
     }
 }

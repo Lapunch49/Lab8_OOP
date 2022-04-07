@@ -18,12 +18,17 @@ namespace Lab8_OOP
         protected bool highlighted = false;
         protected Color color;
         protected int x, y;
-        public CObject() { }
+        protected bool sticky = false;
+        private List<CObject> sticky_observers;
+        public CObject() {
+            sticky_observers = new List<CObject>();
+        }
         public CObject(int x, int y, Color color)
         {
             this.x = x;
             this.y = y;
             this.color = color;
+            sticky_observers = new List<CObject>();
         }
         public virtual void draw(PaintEventArgs e)
         {
@@ -73,6 +78,12 @@ namespace Lab8_OOP
                     case -2: { y += d; break; }
                     default: break;
                 }
+            // если объект липкий, проверяем, не прилепился ли к нему новый объект, и двигаем все прилипшие объекты
+            if (sticky == true)
+            {
+                check_new_objects_sticked();
+                notify_stickyObservers(move, pbW, pbH, d);
+            }
         }
         public virtual int check_resize(bool inc, int pbW, int pbH) // возвращает значение, на которое увеличится объект
         {
@@ -124,6 +135,67 @@ namespace Lab8_OOP
             file.ReadLine();
             x = Int32.Parse(file.ReadLine());
             y = Int32.Parse(file.ReadLine());
+        }
+        public bool get_sticky()
+        {
+            return sticky;
+        }
+        public void set_stickiness()
+        {
+            sticky = true;
+        }
+        public void set_nonStickiness()
+        {
+            sticky = false;
+            sticky_observers.Clear();
+            // sticky_observers = new List<CObject>(); // ?
+        }
+        public void add_stickyObserver(CObject obj)
+        {
+            bool add = true;
+            foreach (CObject i in sticky_observers)
+                if (obj == i)
+                    add = false;
+            if (add == true && this != obj)
+                sticky_observers.Add(obj);
+        }
+        public void del_stickyObserver(CObject obj)
+        {
+            sticky_observers.Remove(obj);
+        }
+        public void notify_stickyObservers(int move, int pbW, int pbH, int d)
+        {
+            foreach (CObject obj in sticky_observers)
+                obj.StickyObjectMoved(move, pbW, pbH, d);
+        }
+        public void StickyObjectMoved(int direction, int pbW, int pbH, int d)
+        {
+            move(direction, pbW, pbH, d);
+        }
+        public virtual Region check_new_objects_sticked()
+        {
+            // просим у хранилища проверить, просмотреть, не принадлежит ли точка из области края 
+            // нашего объекта области другого объекта хранилища
+
+            return null;
+            // возвращаем область края нашего подвинувшегося объекта
+
+            //GraphicsPath path = new GraphicsPath();
+            //path.AddRectangle();
+            //Region rgn = new Region(path);
+            ////if (rgn.IsVisible(x_, y_))
+        }
+        public virtual Region get_region()
+        {
+            return null;
+        }
+        public virtual GraphicsPath get_path()
+        {
+            return null;
+        }
+        public virtual RectangleF get_bounds()
+        {
+            return new RectangleF();
         }
     }
     public class CRectangle : CObject
@@ -249,6 +321,25 @@ namespace Lab8_OOP
             w = Int32.Parse(file.ReadLine());
             h = Int32.Parse(file.ReadLine());
         }
+       
+        public override Region get_region()
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddRectangle(new Rectangle(get_leftrightX(true), get_updownY(true), w, h));
+            return new Region(path);
+        }
+        public override GraphicsPath get_path()
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddRectangle(new Rectangle(get_leftrightX(true), get_updownY(true), w, h));
+            return path;
+        }
+        public override RectangleF get_bounds()
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddRectangle(new Rectangle(get_leftrightX(true), get_updownY(true), w, h));
+            return path.GetBounds();
+        }
     }
     public class CSquare : CRectangle
     {
@@ -310,6 +401,12 @@ namespace Lab8_OOP
         {
             load_xy(file);
             load_wh(file);
+        }
+        public override Region get_region()
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddEllipse(new Rectangle(get_leftrightX(true), get_updownY(true), w, h));
+            return new Region(path);
         }
     }
     public class CCircle : CEllipse
@@ -377,6 +474,13 @@ namespace Lab8_OOP
             w = Int32.Parse(file.ReadLine());
             h = w;
         }
+        public override Region get_region()
+        {
+            Point[] arrPoints = { new Point(x, y - w / 2), new Point(x + w / 2, y + w / 2), new Point(x - w / 2, y + w / 2) };
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(arrPoints);
+            return new Region(path);
+        }
     };
     public class CRhomb : CRectangle
     {
@@ -432,6 +536,13 @@ namespace Lab8_OOP
             load_xy(file);
             load_wh(file);
         }
+        public override Region get_region()
+        {
+            Point[] arrPoints = { new Point(x - w / 2, y), new Point(x, y - h / 2), new Point(x + w / 2, y), new Point(x, y + h / 2) };
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(arrPoints);
+            return new Region(path);
+        }
     }
     public class CTrapeze : CRectangle
     {
@@ -444,14 +555,26 @@ namespace Lab8_OOP
         }
         public override void draw(PaintEventArgs e)
         {
-            Brush.normBrush.Color = color;
-            if (highlighted == false)
+            if (sticky == false)
             {
-                e.Graphics.FillPolygon(Brush.normBrush, get_arrPoints());
+                Brush.normBrush.Color = color;
+                if (highlighted == false)
+                {
+                    e.Graphics.FillPolygon(Brush.normBrush, get_arrPoints());
+                }
+                else
+                {
+                    e.Graphics.FillPolygon(Brush.highlightBrush, get_arrPoints());
+                }
             }
             else
             {
-                e.Graphics.FillPolygon(Brush.highlightBrush, get_arrPoints());
+                Brush.stickyBrush.Dispose();
+                if (highlighted == true)
+                    Brush.stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, Color.Red);
+                else Brush.stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, color);
+
+                e.Graphics.FillPolygon(Brush.stickyBrush, get_arrPoints());
             }
         }
         public override bool mouseClick_on_Object(int x_, int y_)
@@ -476,6 +599,12 @@ namespace Lab8_OOP
         {
             load_xy(file);
             load_wh(file);
+        }
+        public override Region get_region()
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(get_arrPoints());
+            return new Region(path);
         }
     }
     public class CLine : CObject
@@ -503,6 +632,7 @@ namespace Lab8_OOP
             System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
             path.AddPolygon(new Point[] { new Point(x1 + 2, y1 - 2), new Point(x1 - 2, y1 + 2), new Point(x - 2, y + 2), new Point(x + 2, y - 2) });
             Region rgn = new Region(path);
+           
             return (rgn.IsVisible(x_, y_) == true);
         }
         public override void move(int move, int pbW, int pbH, int dd)
@@ -598,6 +728,14 @@ namespace Lab8_OOP
             Point1.set_x(Int32.Parse(file.ReadLine()));
             Point1.set_y(Int32.Parse(file.ReadLine()));
         }
+        public override Region get_region()
+        {
+            int x1 = Point1.get_x();
+            int y1 = Point1.get_y();
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
+            path.AddPolygon(new Point[] { new Point(x1 + 2, y1 - 2), new Point(x1 - 2, y1 + 2), new Point(x - 2, y + 2), new Point(x + 2, y - 2) });
+            return new Region(path);
+        }
     }
     public class CPolygon : CSquare
     {
@@ -642,6 +780,12 @@ namespace Lab8_OOP
             file.ReadLine();
             w = Int32.Parse(file.ReadLine());
             h = w;
+        }
+        public override Region get_region()
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddPolygon(get_arrPoints());
+            return new Region(path);
         }
     }
     public class CGroup: CRectangle

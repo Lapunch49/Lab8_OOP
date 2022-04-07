@@ -181,6 +181,7 @@ namespace Lab8_OOP
             if (line_st != null)
                 e.Graphics.DrawLine(Brush.normPen, line_st.get_x(), line_st.get_y(), mouseX, mouseY);
             //line_st.draw(e);
+            storObj.check_new_objects_sticked(e); 
         }
         private CObject createObj()
         {
@@ -200,6 +201,8 @@ namespace Lab8_OOP
             Brush.Color = new_color;
             Brush.normBrush.Color = new_color;
             Brush.normPen.Color = new_color;
+            //Brush.stickyBrush.Dispose();
+            //Brush.stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, new_color);
             // для отрезка
             if (line_st != null)
                 line_st.set_color(new_color);
@@ -280,10 +283,20 @@ namespace Lab8_OOP
         {
             treeView_stor.Nodes.Clear();
             treeView_stor.Nodes.Add("Storage");
-            for (int i = 0; i < storObj.get_count(); ++i)
-                processNode(treeView_stor.Nodes[0], storObj.get_el(i));
-            // раскрываем главный узел дерева и только его
+            int j = 0;
+            if (storObj.get_count()!=0)
+                processNode(treeView_stor.Nodes[0], storObj.get_el(j));
+            j++;
             treeView_stor.Nodes[0].Expand();
+            while (j < storObj.get_count())
+            {
+                processNode(treeView_stor.Nodes[0], storObj.get_el(j));
+                j++;
+            }
+            //for (int i = 0; i < storObj.get_count(); ++i)
+            //    processNode(treeView_stor.Nodes[0], storObj.get_el(i));
+            // раскрываем главный узел дерева и только его
+            //treeView_stor.Nodes[0].Expand();
         }
         private void treeView_stor_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -291,6 +304,18 @@ namespace Lab8_OOP
             int ind = treeView_stor.SelectedNode.Index;
             // выделяем его
             storObj.change_highlight_of_object(ind);
+            pictureBox1.Invalidate();
+        }
+
+        private void btn_sticky_Click(object sender, EventArgs e)
+        {
+            storObj.set_sticky_of_objects(true);
+            pictureBox1.Invalidate();
+        }
+
+        private void btn_nonSticky_Click(object sender, EventArgs e)
+        {
+            storObj.set_sticky_of_objects(false);
             pictureBox1.Invalidate();
         }
     }
@@ -301,5 +326,8 @@ namespace Lab8_OOP
         public static Pen normPen = new Pen(Color.LightPink, 3);
         public static Pen highlightPen = new Pen(Color.Red, 4);
         public static Color Color = Color.LightPink;
+
+
+        public static HatchBrush stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, Color.Pink);
     }
 }
