@@ -66,23 +66,22 @@ namespace Lab8_OOP
                 default: return 0;
             }
         }
-        public virtual void move(int move, int pbW, int pbH, int d)
+        public virtual void move(int direct, int pbW, int pbH, int delt)
         {
-            d = check_move(move, pbW, pbH, d);
-            if (move != 0)
-                switch (move)
+            delt = check_move(direct, pbW, pbH, delt);
+            if (direct != 0)
+                switch (direct)
                 {
-                    case 1: { x += d; break; }
-                    case -1: { x -= d; break; }
-                    case 2: { y -= d; break; }
-                    case -2: { y += d; break; }
+                    case 1: { x += delt; break; }
+                    case -1: { x -= delt; break; }
+                    case 2: { y -= delt; break; }
+                    case -2: { y += delt; break; }
                     default: break;
                 }
-            // если объект липкий, проверяем, не прилепился ли к нему новый объект, и двигаем все прилипшие объекты
+            // если объект липкий, двигаем все прилипшие объекты
             if (sticky == true)
             {
-                check_new_objects_sticked();
-                notify_stickyObservers(move, pbW, pbH, d);
+                notify_stickyObservers(direct, pbW, pbH, delt);
             }
         }
         public virtual int check_resize(bool inc, int pbW, int pbH) // возвращает значение, на которое увеличится объект
@@ -166,24 +165,12 @@ namespace Lab8_OOP
         public void notify_stickyObservers(int move, int pbW, int pbH, int d)
         {
             foreach (CObject obj in sticky_observers)
-                obj.StickyObjectMoved(move, pbW, pbH, d);
+                obj.StickyObjectMoved(move, pbW, pbH, d, this);
         }
-        public void StickyObjectMoved(int direction, int pbW, int pbH, int d)
+        public void StickyObjectMoved(int direction, int pbW, int pbH, int delt, CObject Observed)
         {
-            move(direction, pbW, pbH, d);
-        }
-        public virtual Region check_new_objects_sticked()
-        {
-            // просим у хранилища проверить, просмотреть, не принадлежит ли точка из области края 
-            // нашего объекта области другого объекта хранилища
-
-            return null;
-            // возвращаем область края нашего подвинувшегося объекта
-
-            //GraphicsPath path = new GraphicsPath();
-            //path.AddRectangle();
-            //Region rgn = new Region(path);
-            ////if (rgn.IsVisible(x_, y_))
+            if (highlighted == false && sticky_observers.IndexOf(Observed)!=0)
+                move(direction, pbW, pbH, delt);
         }
         public virtual Region get_region()
         {
@@ -321,24 +308,11 @@ namespace Lab8_OOP
             w = Int32.Parse(file.ReadLine());
             h = Int32.Parse(file.ReadLine());
         }
-       
         public override Region get_region()
         {
             GraphicsPath path = new GraphicsPath();
             path.AddRectangle(new Rectangle(get_leftrightX(true), get_updownY(true), w, h));
             return new Region(path);
-        }
-        public override GraphicsPath get_path()
-        {
-            GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new Rectangle(get_leftrightX(true), get_updownY(true), w, h));
-            return path;
-        }
-        public override RectangleF get_bounds()
-        {
-            GraphicsPath path = new GraphicsPath();
-            path.AddRectangle(new Rectangle(get_leftrightX(true), get_updownY(true), w, h));
-            return path.GetBounds();
         }
     }
     public class CSquare : CRectangle
@@ -635,15 +609,15 @@ namespace Lab8_OOP
            
             return (rgn.IsVisible(x_, y_) == true);
         }
-        public override void move(int move, int pbW, int pbH, int dd)
+        public override void move(int direct, int pbW, int pbH, int delt)
         {
-            int d = check_move(move, pbW, pbH, 10);
-            int d1 = Point1.check_move(move, pbW, pbH, 10);
+            int d = check_move(direct, pbW, pbH, 10);
+            int d1 = Point1.check_move(direct, pbW, pbH, 10);
             if (d >= 0 && d1 >= 0)
             {
                 int d_ = Math.Min(d, d1);
-                d_ = Math.Min(d_, dd);
-                switch (move)
+                d_ = Math.Min(d_, delt);
+                switch (direct)
                 {
                     case 1: { x += d_; Point1.move_x(d_); break; }
                     case -1: { x -= d_; Point1.move_x(-d_); break; }
@@ -652,6 +626,7 @@ namespace Lab8_OOP
                     default: break;
                 }
             }
+            notify_stickyObservers(direct, pbW, pbH, delt);
         }
         public override int check_resize(bool inc, int pbW, int pbH)
         {
@@ -842,14 +817,15 @@ namespace Lab8_OOP
             }
             else return default;
         }
-        public override void move(int move, int pbW, int pbH, int d)
+        public override void move(int direct, int pbW, int pbH, int delt)
         {
             // вычисляем возможную для всей группы велечину перемещения
-            d = check_move(move, pbW, pbH, d);
+            delt = check_move(direct, pbW, pbH, delt);
             for (int i = 0; i < count; ++i)
             {
-                objects[i].move(move, pbW, pbH, d);
+                objects[i].move(direct, pbW, pbH, delt);
             }
+            notify_stickyObservers(direct, pbW, pbH, delt);
         }
         public override void draw(PaintEventArgs e)
         {
