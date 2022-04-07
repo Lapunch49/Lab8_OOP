@@ -208,7 +208,7 @@ namespace Lab8_OOP
                             if (!rgn.IsEmpty(e.Graphics))
                             {
                                 st[i].add_stickyObserver(st[j]);
-                                e.Graphics.FillRegion(Brush.stickyBrush, rgn);
+                                //e.Graphics.FillRegion(Brush.stickyBrush, rgn);
                             }
                             else st[i].del_stickyObserver(st[j]);
 

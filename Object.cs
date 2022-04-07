@@ -20,6 +20,7 @@ namespace Lab8_OOP
         protected int x, y;
         protected bool sticky = false;
         private List<CObject> sticky_observers;
+        protected System.Drawing.Brush brush = Brush.normBrush;
         public CObject() {
             sticky_observers = new List<CObject>();
         }
@@ -142,12 +143,28 @@ namespace Lab8_OOP
         public void set_stickiness()
         {
             sticky = true;
+            brush = Brush.stickyBrush;
         }
         public void set_nonStickiness()
         {
             sticky = false;
             sticky_observers.Clear();
-            // sticky_observers = new List<CObject>(); // ?
+            brush = Brush.normBrush;
+        }
+        public void set_color_to_brush()
+        {
+            if (highlighted == false)
+            {
+                if ((brush as HatchBrush) != null)
+                    brush = new HatchBrush(HatchStyle.LargeConfetti, Color.Gray, color);
+                else brush = new SolidBrush(color);
+            }
+            else
+            {
+                if ((brush as HatchBrush) != null)
+                    brush = new HatchBrush(HatchStyle.LargeConfetti, Color.Gray, Color.Red);
+                else brush = new SolidBrush(Color.Red);
+            }
         }
         public void add_stickyObserver(CObject obj)
         {
@@ -162,6 +179,10 @@ namespace Lab8_OOP
         {
             sticky_observers.Remove(obj);
         }
+        public void del_observers()
+        {
+            sticky_observers.Clear();
+        }
         public void notify_stickyObservers(int move, int pbW, int pbH, int d)
         {
             foreach (CObject obj in sticky_observers)
@@ -169,7 +190,12 @@ namespace Lab8_OOP
         }
         public void StickyObjectMoved(int direction, int pbW, int pbH, int delt, CObject Observed)
         {
-            if (highlighted == false && sticky_observers.IndexOf(Observed)!=0)
+            // найдем, входит ли наблюдаемый объект в список наблюдателей
+            bool yes = false;
+            foreach (CObject obs in sticky_observers)
+                if (obs == Observed) yes = true;
+
+            if (highlighted == false && (Observed.get_highlighted() == true || yes == false))
                 move(direction, pbW, pbH, delt);
         }
         public virtual Region get_region()
@@ -196,10 +222,8 @@ namespace Lab8_OOP
         }
         public override void draw(PaintEventArgs e)
         {
-            Brush.normBrush.Color = color;
-            if (highlighted == false)
-                e.Graphics.FillRectangle(Brush.normBrush, x - w / 2, y - h / 2, w, h);
-            else e.Graphics.FillRectangle(Brush.highlightBrush, x - w / 2, y - h / 2, w, h);
+            set_color_to_brush();
+            e.Graphics.FillRectangle(brush, x - w / 2, y - h / 2, w, h);
         }
         public override bool mouseClick_on_Object(int x_, int y_)
         {
@@ -346,16 +370,14 @@ namespace Lab8_OOP
         public CEllipse(int x, int y, Color color) : base(x, y, color) { }
         public override void draw(PaintEventArgs e)
         {
-            Brush.normBrush.Color = color;
-            if (highlighted == false)
-                e.Graphics.FillEllipse(Brush.normBrush, x - w / 2, y - h / 2, w, h);
-            else e.Graphics.FillEllipse(Brush.highlightBrush, x - w / 2, y - h / 2, w, h);
+            set_color_to_brush();
+            e.Graphics.FillEllipse(brush, x - w / 2, y - h / 2, w, h);
         }
         public override bool mouseClick_on_Object(int x_, int y_)
         {
             GraphicsPath path = new GraphicsPath();
             path.AddEllipse(x-w/2, y-h/2, w, h);
-            Region rgn = new Region(path);
+            Region rgn = get_region();
             if (rgn.IsVisible(x_, y_)) 
                 return true;
             else return false;
@@ -415,11 +437,9 @@ namespace Lab8_OOP
 
         public override void draw(PaintEventArgs e)
         {
-            Brush.normBrush.Color = color;
+            set_color_to_brush();
             Point[] arrPoints = { new Point(x, y - w / 2), new Point(x + w / 2, y + w / 2), new Point(x - w / 2, y + w / 2) };
-            if (highlighted == false)
-                e.Graphics.FillPolygon(Brush.normBrush, arrPoints);
-            else e.Graphics.FillPolygon(Brush.highlightBrush, arrPoints);
+            e.Graphics.FillPolygon(brush, arrPoints);
         }
         public override bool mouseClick_on_Object(int x_, int y_)
         {
@@ -464,11 +484,9 @@ namespace Lab8_OOP
         }
         public override void draw(PaintEventArgs e)
         {
-            Brush.normBrush.Color = color;
+            set_color_to_brush();
             Point[] arrPoints = { new Point(x - w / 2, y), new Point(x, y - h / 2), new Point(x + w / 2, y), new Point(x, y + h / 2) };
-            if (highlighted == false)
-                e.Graphics.FillPolygon(Brush.normBrush, arrPoints);
-            else e.Graphics.FillPolygon(Brush.highlightBrush, arrPoints);
+            e.Graphics.FillPolygon(brush, arrPoints);
         }
         public override bool mouseClick_on_Object(int x_, int y_)
         {
@@ -529,27 +547,8 @@ namespace Lab8_OOP
         }
         public override void draw(PaintEventArgs e)
         {
-            if (sticky == false)
-            {
-                Brush.normBrush.Color = color;
-                if (highlighted == false)
-                {
-                    e.Graphics.FillPolygon(Brush.normBrush, get_arrPoints());
-                }
-                else
-                {
-                    e.Graphics.FillPolygon(Brush.highlightBrush, get_arrPoints());
-                }
-            }
-            else
-            {
-                Brush.stickyBrush.Dispose();
-                if (highlighted == true)
-                    Brush.stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, Color.Red);
-                else Brush.stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, color);
-
-                e.Graphics.FillPolygon(Brush.stickyBrush, get_arrPoints());
-            }
+            set_color_to_brush();
+            e.Graphics.FillPolygon(brush, get_arrPoints());
         }
         public override bool mouseClick_on_Object(int x_, int y_)
         {
@@ -594,19 +593,15 @@ namespace Lab8_OOP
         public override string classname() { return "CLine"; }
         public override void draw(PaintEventArgs e)
         {
-            Brush.normPen.Color = color;
-            if (highlighted == false)
-                e.Graphics.DrawLine(Brush.normPen, Point1.get_x(), Point1.get_y(), x, y);
-            else e.Graphics.DrawLine(Brush.highlightPen, Point1.get_x(), Point1.get_y(), x, y);
+            Pen normPenCopy = Brush.normPen.Clone() as Pen;
+            set_color_to_brush();
+            Brush.normPen.Brush = brush;
+            e.Graphics.DrawLine(Brush.normPen, Point1.get_x(), Point1.get_y(), x, y);
+            Brush.normPen = normPenCopy;
         }
         public override bool mouseClick_on_Object(int x_, int y_)
-        {
-            int x1 = Point1.get_x();
-            int y1 = Point1.get_y();
-            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
-            path.AddPolygon(new Point[] { new Point(x1 + 2, y1 - 2), new Point(x1 - 2, y1 + 2), new Point(x - 2, y + 2), new Point(x + 2, y - 2) });
-            Region rgn = new Region(path);
-           
+        { 
+            Region rgn = get_region();
             return (rgn.IsVisible(x_, y_) == true);
         }
         public override void move(int direct, int pbW, int pbH, int delt)
@@ -723,16 +718,12 @@ namespace Lab8_OOP
         }
         public override void draw(PaintEventArgs e)
         {
-            Brush.normBrush.Color = color;
-            if (highlighted == false)
-                e.Graphics.FillPolygon(Brush.normBrush, get_arrPoints());
-            else e.Graphics.FillPolygon(Brush.highlightBrush, get_arrPoints());
+            set_color_to_brush();
+            e.Graphics.FillPolygon(brush, get_arrPoints());
         }
         public override bool mouseClick_on_Object(int x_, int y_)
         {
-            GraphicsPath path = new GraphicsPath();
-            path.AddPolygon(get_arrPoints());
-            Region rgn = new Region(path);
+            Region rgn = get_region();
             if (rgn.IsVisible(x_, y_))
                 return true;
             else return false;
@@ -790,6 +781,9 @@ namespace Lab8_OOP
             }
             objects[count] = new_obj;
             count++;
+            // очищаем список наблюдателей у объекта, чтобы они не продолжили двигаться за объектом,
+            // который уже заключен в группу
+            //new_obj.del_observers();
         }
         private Rectangle get_rect()
         {
@@ -829,15 +823,22 @@ namespace Lab8_OOP
         }
         public override void draw(PaintEventArgs e)
         {
+            Rectangle rect = get_rect();
+            // если группа липкая, выделяем ее прям. обл. текстурой
+            if (sticky == true)
+                e.Graphics.FillRectangle(Brush.stickyRectBrush, rect);
+            
             // рисуем объекты внутри группы
             for (int i = 0; i < count; ++i)
                 objects[i].draw(e);
             // рисуем рамку
-            Rectangle rect = get_rect();
-            Brush.normPen.Color = color;
-            if (highlighted == false)
-                e.Graphics.DrawRectangle(Brush.normPen, rect);
-            else e.Graphics.DrawRectangle(Brush.highlightPen, rect);
+            //Rectangle rect = get_rect();
+            Pen framePenCopy = Brush.framePen.Clone() as Pen;
+            set_color_to_brush();
+            Brush.framePen.Brush = brush;
+            e.Graphics.DrawRectangle(Brush.framePen, rect);
+            Brush.framePen = framePenCopy;
+            
         }
         public override void resize(bool inc, int pbW, int pbH, int d)
         {   // находим возможную для всей группы величину увел/умен

@@ -32,6 +32,7 @@ namespace Lab8_OOP
         CObject line_st = null; // точка - начало отрезка
         public int mouseX = 0;
         public int mouseY = 0;
+        Color cur_color = Color.LightPink;
         public Form1()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace Lab8_OOP
             Brush.normPen.StartCap = LineCap.RoundAnchor;
             Brush.highlightPen.EndCap = LineCap.RoundAnchor;
             Brush.highlightPen.StartCap = LineCap.RoundAnchor;
+            Brush.framePen.DashStyle = DashStyle.Dash;
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -125,7 +127,7 @@ namespace Lab8_OOP
                     if (cur_select != "CLine")
                         {
                         CObject newObj = createObj();
-                        newObj = newObj.new_obj(e.X, e.Y, Brush.normBrush.Color);
+                        newObj = newObj.new_obj(e.X, e.Y, cur_color);
                         storObj.add(newObj);
 
                         //считаем, что мы попали по нему
@@ -134,11 +136,11 @@ namespace Lab8_OOP
                     else if (cur_select == "CLine")
                         if (line_st == null)
                         {
-                            line_st = new CObject(e.X, e.Y, Brush.normPen.Color);
+                            line_st = new CObject(e.X, e.Y, cur_color);
                         }
                         else
                         {
-                            CObject newObj = new CLine(line_st, e.X, e.Y, Brush.normPen.Color);
+                            CObject newObj = new CLine(line_st, e.X, e.Y, cur_color);
                             line_st = null;
                             storObj.add(newObj);
                             ind = storObj.get_count() - 1;
@@ -150,7 +152,7 @@ namespace Lab8_OOP
                     // дорисовываем отрезок, если 1 точка отрезка уже есть 
                     if (cur_select == "CLine" && line_st != null)
                     {
-                        CObject newObj = new CLine(line_st, e.X, e.Y, Brush.normPen.Color);
+                        CObject newObj = new CLine(line_st, e.X, e.Y, cur_color);
                         line_st = null;
                         storObj.add(newObj);
                         ind = storObj.get_count() - 1;
@@ -174,9 +176,8 @@ namespace Lab8_OOP
             for (int i = 0; i < storObj.get_count(); ++i)
                 if (storObj.get_el(i) != null)
                     storObj.get_el(i).draw(e);
-            // возвращаем цвет кистям
-            Brush.normBrush.Color = Brush.Color;
-            Brush.normPen.Color = Brush.Color;
+            // возвращаем цвет кисти (для возм. рисования отрезка с одной точкой)
+            Brush.normPen.Color = cur_color;
             // рисуем начало отрезка, если оно есть 
             if (line_st != null)
                 e.Graphics.DrawLine(Brush.normPen, line_st.get_x(), line_st.get_y(), mouseX, mouseY);
@@ -194,18 +195,15 @@ namespace Lab8_OOP
         }
         private void btn_color_Click(object sender, EventArgs e)
         {
-            Color new_color = ((Button)sender).BackColor;
+            cur_color = ((Button)sender).BackColor;
             // у выделенных объектов меняем цвет
-            storObj.setColor_highlighted_objects(new_color);
+            storObj.setColor_highlighted_objects(cur_color);
             // меняем текущий цвет, используемый при рисовании новых фигур
-            Brush.Color = new_color;
-            Brush.normBrush.Color = new_color;
-            Brush.normPen.Color = new_color;
-            //Brush.stickyBrush.Dispose();
-            //Brush.stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, new_color);
+
+            Brush.normPen.Color = cur_color;
             // для отрезка
             if (line_st != null)
-                line_st.set_color(new_color);
+                line_st.set_color(cur_color);
         }
 
         private void btn_other_Click(object sender, EventArgs e)
@@ -283,20 +281,20 @@ namespace Lab8_OOP
         {
             treeView_stor.Nodes.Clear();
             treeView_stor.Nodes.Add("Storage");
-            int j = 0;
-            if (storObj.get_count()!=0)
-                processNode(treeView_stor.Nodes[0], storObj.get_el(j));
-            j++;
-            treeView_stor.Nodes[0].Expand();
-            while (j < storObj.get_count())
-            {
-                processNode(treeView_stor.Nodes[0], storObj.get_el(j));
-                j++;
-            }
-            //for (int i = 0; i < storObj.get_count(); ++i)
-            //    processNode(treeView_stor.Nodes[0], storObj.get_el(i));
-            // раскрываем главный узел дерева и только его
+            //int j = 0;
+            //if (storObj.get_count()!=0)
+            //    processNode(treeView_stor.Nodes[0], storObj.get_el(j));
+            //j++;
             //treeView_stor.Nodes[0].Expand();
+            //while (j < storObj.get_count())
+            //{
+            //    processNode(treeView_stor.Nodes[0], storObj.get_el(j));
+            //    j++;
+            //}
+            for (int i = 0; i < storObj.get_count(); ++i)
+                processNode(treeView_stor.Nodes[0], storObj.get_el(i));
+            // раскрываем главный узел дерева и только его
+            treeView_stor.Nodes[0].Expand();
         }
         private void treeView_stor_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -325,9 +323,9 @@ namespace Lab8_OOP
         public static SolidBrush highlightBrush = new SolidBrush(Color.Red);
         public static Pen normPen = new Pen(Color.LightPink, 3);
         public static Pen highlightPen = new Pen(Color.Red, 4);
-        public static Color Color = Color.LightPink;
-
 
         public static HatchBrush stickyBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, Color.Pink);
+        public static Pen framePen = new Pen(Color.Black, 3);
+        public static HatchBrush stickyRectBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.Black, Color.White);
     }
 }
